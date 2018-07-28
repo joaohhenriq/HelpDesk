@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -36,6 +37,7 @@ public class Ticket {
 	
 	private String image; //imagem do erro/problema do ticket;
 	
+	@Transient //para não representar isso no banco de dados, seja ignorado, pois será trabalhado em tempo de execução
 	private List<ChangeStatus> changes; //Lista com todas as alterações do status do ticket
 
 	public String getId() {

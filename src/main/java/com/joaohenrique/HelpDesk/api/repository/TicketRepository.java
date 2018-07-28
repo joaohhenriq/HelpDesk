@@ -19,21 +19,24 @@ public interface TicketRepository extends MongoRepository<Ticket, String> {
 	// o usuário já deve ver
 	// O atributo Date é encontrado na entidade Ticket
 	// Para fazer a peginação, precisa passar a a interface pageable
+	// O Id é capturado conforme explicado no ChangeStatusRepository
 	Page<Ticket> findByUserIdOrderByDateDesc(Pageable pages, String userId);
 
 	// Método com vários parâmetros de pesquisa
 	// Todos os atributos passados se encontram na entidade Ticket
-	Page<Ticket> findByTitleIgnoreCaseContainingAndStatusIgnoreCaseContainingAndPriorityIgnoreCaseContainingOrderByDateDesc(
+	//o titulo tem ignoreCase (não diferenciar maiúsculo de minúsculo) pois o usuário pode digitar de qualquer forma
+	//status e priority não possuem por serem enums, o usuário não vai digitar
+	Page<Ticket> findByTitleIgnoreCaseContainingAndStatusAndPriorityOrderByDateDesc(
 			String title, String status, String priority, Pageable pages);
 
 	// Método para usar no caso do cliente que pode fazer a pesquisa com todos estes
 	// parâmetros, mas deve ver somente os tickets relacionados à ele
-	Page<Ticket> findByTitleIgnoreCaseContainingAndStatusIgnoreCaseContainingAndPriorityIgnoreCaseContainingAndUserIdOrderByDateDesc(
+	Page<Ticket> findByTitleIgnoreCaseContainingAndStatusAndPriorityAndUserIdOrderByDateDesc(
 			String title, String status, String priority, Pageable pages);
 
 	// Método para usar no caso do técnico, que deseja ver todos os tickets que
 	// estão sendo realizados por ele
-	Page<Ticket> findByTitleIgnoreCaseContainingAndStatusIgnoreCaseContainingAndPriorityIgnoreCaseContainingAndAssignedUserIdOrderByDateDesc(
+	Page<Ticket> findByTitleIgnoreCaseContainingAndStatusAndPriorityAndAssignedUserIdOrderByDateDesc(
 			String title, String status, String priority, Pageable pages);
 	
 	//Método para pesquisar pelo número do ticket, uma forma mais simples do que pesquisar por seu ID
