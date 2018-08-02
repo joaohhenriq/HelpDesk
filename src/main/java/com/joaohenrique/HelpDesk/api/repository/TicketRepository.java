@@ -32,7 +32,7 @@ public interface TicketRepository extends MongoRepository<Ticket, String> {
 	// Método para usar no caso do cliente que pode fazer a pesquisa com todos estes
 	// parâmetros, mas deve ver somente os tickets relacionados à ele
 	Page<Ticket> findByTitleIgnoreCaseContainingAndStatusAndPriorityAndUserIdOrderByDateDesc(
-			String title, String status, String priority, Pageable pages);
+			String title, String status, String priority, String userId, Pageable pages);
 
 	// Método para usar no caso do técnico, que deseja ver todos os tickets que
 	// estão sendo realizados por ele
