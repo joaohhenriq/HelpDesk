@@ -37,7 +37,7 @@ public interface TicketRepository extends MongoRepository<Ticket, String> {
 	// Método para usar no caso do técnico, que deseja ver todos os tickets que
 	// estão sendo realizados por ele
 	Page<Ticket> findByTitleIgnoreCaseContainingAndStatusAndPriorityAndAssignedUserIdOrderByDateDesc(
-			String title, String status, String priority, Pageable pages);
+			String title, String status, String priority, String userId, Pageable pages);
 	
 	//Método para pesquisar pelo número do ticket, uma forma mais simples do que pesquisar por seu ID
 	Page<Ticket> findByNumber(Integer number, Pageable pages);
